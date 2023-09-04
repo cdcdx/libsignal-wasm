@@ -1,5 +1,5 @@
 [package]
-name = "securedrop-source"
+name = "libsignal-wasm"
 version = "0.1.0"
 authors = ["redshiftzero <jen@freedom.press>"]
 edition = "2021"

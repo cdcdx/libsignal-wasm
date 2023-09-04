@@ -11,6 +11,7 @@ use futures::executor::block_on;
 use uuid::Uuid;
 
 use libsignal_protocol_rust::{
+    group_decrypt, group_encrypt,
     message_decrypt, message_encrypt, process_prekey_bundle, sealed_sender_decrypt,
     sealed_sender_encrypt, CiphertextMessage, IdentityKey, IdentityKeyPair, IdentityKeyStore,
     InMemSignalProtocolStore, KeyPair, PreKeyBundle, ProtocolAddress, PublicKey, SenderCertificate,

@@ -1,2 +1,2 @@
 [workspace]
-members = ["securedrop-source"]
+members = ["libsignal-wasm"]

@@ -1,4 +1,4 @@
-# securedrop-e2e
+# libsignal-wasm
 
 _prototype source + journalist clients for SecureDrop_
 
@@ -20,13 +20,13 @@ $ source .venv/bin/activate
 
 To try out e2e encryption, complete the following steps:
 
-0. Setup the `securedrop-source` crate as [described below](#securedrop-source-crate).
+0. Setup the `libsignal-wasm` crate as [described below](#libsignal-wasm-crate).
 1. In the main `securedrop` repo, check out the [`signal-proto-focal`](https://github.com/freedomofpress/securedrop/tree/signal-proto-focal) branch,
    which provides the required v2 APIs.
    (We assume you have previously run development environment for SecureDrop.
    See the [SecureDrop developer documentation ](https://docs.securedrop.org/en/stable/development/setup_development.html) for more.)
 1. Run `make dev` to start the SecureDrop developement server.
-1. Once the server is running, set the `SECUREDROP_JOURNALIST_PASSPHRASE` and `SECUREDROP_JOURNALIST_TOTP` environment variables to the passphrase and totp secret values used in the dev environment (see https://github.com/freedomofpress/securedrop-e2e/blob/main/journalist.py#L14-L16).
+1. Once the server is running, set the `SECUREDROP_JOURNALIST_PASSPHRASE` and `SECUREDROP_JOURNALIST_TOTP` environment variables to the passphrase and totp secret values used in the dev environment (see https://github.com/cdcdx/libsignal-wasm/blob/main/journalist.py#L14-L16).
 1. Start `journalist.py`:
 
    ```
@@ -65,9 +65,9 @@ The `mtype` field is a `u8` with the following meanings:
 | `2`-`10` | `SD_GROUP_MANAGEMENT*`      | Reserved for group management messages.                                                                                                           |
 | `12`-    | Available.                  |                                                                                                                                                   |
 
-## `securedrop-source` crate
+## `libsignal-wasm` crate
 
-`securedrop-source` is a Rust crate that provides a high-level wrapper for the cryptographic operations
+`libsignal-wasm` is a Rust crate that provides a high-level wrapper for the cryptographic operations
 required to register as a Signal client and encrypt and decrypt messages.
 It compiles to WebAssembly for use on the SecureDrop source interface to enable client-side cryptographic operations.
 
@@ -79,9 +79,9 @@ cargo doc --open
 
 ### Development
 
-You will need a Rust toolchain installed on your system to work on the `securedrop-source` crate.
+You will need a Rust toolchain installed on your system to work on the `libsignal-wasm` crate.
 To compile to Wasm and generate glue JS for the source interface,
-build the `securedrop-source` directory with [`wasm-pack`](https://github.com/rustwasm/wasm-pack):
+build the `libsignal-wasm` directory with [`wasm-pack`](https://github.com/rustwasm/wasm-pack):
 
 ```
 make build
@@ -93,12 +93,12 @@ That command will:
   2. Compile to Wasm and generate glue JS for the Source Interface
   3. Copy the JS files to SecureDrop repo at `../securedrop/`
 
-The `pkg` directory within the securedrop-source crate contains the Wasm and JS,
+The `pkg` directory within the libsignal-wasm crate contains the Wasm and JS,
 along with other files that are not strictly required. The two files you want are:
 
 ```
-./securedrop-source/pkg/securedrop_source.js
-./securedrop-source/pkg/securedrop_source_bg.wasm
+./libsignal-wasm/pkg/libsignal_wasm.js
+./libsignal-wasm/pkg/libsignal_wasm_bg.wasm
 ```
 
 You can now set up event handlers and other logic as you see fit using JS on the source interface.
